@@ -672,6 +672,25 @@
       .lt-nav { display: none; }
     }
   </style>
+
+  <!-- ===== Facebook Pixel ===== -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1266757242198992');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1266757242198992&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- ===== End Facebook Pixel ===== -->
 </head>
 <body>
 
@@ -1053,7 +1072,7 @@
       <div class="countdown-box"><div class="countdown-num" id="cd-s">33</div><div class="countdown-label">秒</div></div>
     </div>
 
-    <a href="https://line.me/R/ti/p/YOUR_LINE_ID" class="cta-btn" target="_blank">
+    <a href="https://lin.ee/zqmNeJM" class="cta-btn" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.7 1.3 5.12 3.36 6.83L4.5 22l4.36-2.27A10.7 10.7 0 0012 20c5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
       👉 點擊這裡，立即加 Line 免費評估
     </a>
@@ -1065,7 +1084,7 @@
 <!-- ===== STICKY BOTTOM CTA ===== -->
 <div class="sticky-cta">
   <p>🌿 免費痛症評估<br><span style="font-size:11px;opacity:.85;">調理師一對一指導，立即諮詢</span></p>
-  <a href="https://line.me/R/ti/p/YOUR_LINE_ID" target="_blank">加 LINE 免費諮詢 →</a>
+  <a href="https://lin.ee/zqmNeJM" target="_blank">加 LINE 免費諮詢 →</a>
 </div>
 
 <!-- ===== FOOTER ===== -->
@@ -1113,6 +1132,34 @@
     var day = d.getDate();
     document.getElementById('pub-date').textContent = y + '年' + mo + '月' + day + '日';
   })();
+
+  // ===== FB Pixel: ViewContent (scroll 50%) =====
+  (function(){
+    var fired = false;
+    window.addEventListener('scroll', function(){
+      if(fired) return;
+      var scrolled = window.scrollY + window.innerHeight;
+      var total = document.documentElement.scrollHeight;
+      if(scrolled / total >= 0.5){
+        fired = true;
+        if(typeof fbq !== 'undefined'){
+          fbq('track', 'ViewContent');
+        }
+      }
+    });
+  })();
+
+  // ===== FB Pixel: Lead (click any Line CTA) =====
+  (function(){
+    document.querySelectorAll('a[href*="lin.ee"], a[href*="line.me"]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(typeof fbq !== 'undefined'){
+          fbq('track', 'Lead');
+        }
+      });
+    });
+  })();
+
 </script>
 
 </body>
