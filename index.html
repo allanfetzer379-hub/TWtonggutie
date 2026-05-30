@@ -1086,6 +1086,13 @@
       });
   }
 
+  // Price map for FB Pixel Purchase value
+  var PKG_PRICE_MAP = {
+    '一盒套餐': 980,
+    '三盒套餐': 1398,
+    '七盒套餐': 1998
+  };
+
   function sendToGoogleForm(name, phone, city, dist, addr, pkg, ip) {
     var FORM_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdvn2jKLzRaUdwZSiIBAd80MbzU0xe7wSaXT6Mclj38ktKQ1A/formResponse';
     var params = new URLSearchParams();
@@ -1107,12 +1114,15 @@
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: params.toString()
     })
-    .then(function(){ redirectToThanks(); })
-    .catch(function(){ redirectToThanks(); });
+    .then(function(){ redirectToThanks(pkg); })
+    .catch(function(){ redirectToThanks(pkg); });
   }
 
-  function redirectToThanks() {
-    window.location.href = 'thanks.html';
+  function redirectToThanks(pkg) {
+    // Extract package name (first token before space)
+    var pkgName = pkg.split(' ')[0]; // e.g. "三盒套餐"
+    var price = PKG_PRICE_MAP[pkgName] || 1398;
+    window.location.href = 'thanks.html?pkg=' + encodeURIComponent(pkgName) + '&price=' + price;
   }
 
   function showErr(field) {
@@ -1162,15 +1172,4 @@
 
   // ===== FB Pixel: Lead on LINE button click =====
   document.getElementById('line-btn').addEventListener('click', function(){
-    if (typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
-  });
-
-  // ===== FB Pixel: AddToCart on pkg card click =====
-  document.querySelectorAll('.pkg-card').forEach(function(card){
-    card.addEventListener('click', function(){
-      if (typeof fbq !== 'undefined') { fbq('track', 'AddToCart'); }
-    });
-  });
-</script>
-</body>
-</html>
+ 
