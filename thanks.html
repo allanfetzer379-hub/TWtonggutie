@@ -18,13 +18,17 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1266757242198992');
     fbq('track', 'PageView');
-    // Purchase event — fired immediately on page load
-    fbq('track', 'Purchase', {
-      value: 1398,
-      currency: 'TWD',
-      content_name: '藏藥非遺透骨膏貼',
-      content_type: 'product'
-    });
+    // Purchase event — value read from URL param
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var price = parseFloat(params.get('price')) || 1398;
+      fbq('track', 'Purchase', {
+        value: price,
+        currency: 'TWD',
+        content_name: '藏藥非遺透骨膏貼',
+        content_type: 'product'
+      });
+    })();
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
@@ -166,6 +170,39 @@
     .step-text { font-size: 14px; color: #444; line-height: 1.7; padding-top: 4px; }
     .step-text strong { color: #005500; }
 
+    /* Order Summary */
+    .order-summary {
+      background: #fff8e8;
+      border-top: 1px solid #ffe0a0;
+      padding: 16px 20px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .summary-label {
+      font-size: 14px;
+      color: #666;
+    }
+    .summary-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+    }
+    .summary-price {
+      font-size: 22px;
+      font-weight: 900;
+      color: #d00000;
+    }
+    .summary-note {
+      font-size: 12px;
+      color: #999;
+      text-align: right;
+      margin-top: 2px;
+    }
+
     /* Trust badges */
     .trust-row {
       background: #fff;
@@ -259,7 +296,20 @@
   <div class="success-banner">
     <div class="success-icon">🎉</div>
     <div class="success-title">訂單已成功送出！</div>
-    <p class="success-sub">感謝您的訂購，我們已收到您的收件資訊<br>請靜待宅配送達，收到貨再付款</p>
+    <p class="success-sub">感謝您的訂貼，我們已收到您的收件資訊<br>請靜待宅配送達，收到貨再付款</p>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="order-summary" id="order-summary">
+    <div class="summary-row">
+      <span class="summary-label">📦 已選套餐</span>
+      <span class="summary-value" id="summary-pkg">三盒套餐</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">💰 應付金額</span>
+      <span class="summary-price" id="summary-price">NT$1,398</span>
+    </div>
+    <div class="summary-note">貨到付款 · 收到包裹再付給宅配員</div>
   </div>
 
   <!-- Product Info -->
@@ -328,5 +378,17 @@
   © 2026 藏藥非遺透骨膏貼 · 本頁面僅供訂單確認使用
 </div>
 
+<script>
+  // Read URL params and populate order summary
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    var pkg   = params.get('pkg')   || '三盒套餐';
+    var price = params.get('price') || '1398';
+    var priceNum = parseInt(price, 10);
+    var priceFormatted = 'NT$' + priceNum.toLocaleString('zh-TW');
+    document.getElementById('summary-pkg').textContent   = pkg;
+    document.getElementById('summary-price').textContent = priceFormatted;
+  })();
+</script>
 </body>
 </html>
