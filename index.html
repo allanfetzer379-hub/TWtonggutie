@@ -2,19 +2,22 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>台灣人一年貼掉4億片痠痛貼布，復健科醫師終於說實話 | LINE TODAY</title>
   <meta name="description" content="中醫骨傷權威彭溫雅醫師揭秘：為什麼你的腰痠背痛、膝蓋痛貼了幾十年都沒好？深層寒濕不拔除，痛症永遠好不了。" />
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
       font-size: 17px;
       color: #222;
       background: #f5f5f5;
       line-height: 1.8;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
@@ -31,6 +34,9 @@
       top: 0;
       z-index: 999;
       box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      width: 100%;
+      max-width: 100vw;
+      overflow: hidden;
     }
     .lt-logo {
       display: flex;
@@ -40,6 +46,7 @@
       font-size: 20px;
       color: #00b900;
       letter-spacing: -0.5px;
+      flex-shrink: 0;
     }
     .lt-logo-icon {
       width: 32px; height: 32px;
@@ -83,6 +90,7 @@
       font-size: 13px;
       color: #888;
       cursor: pointer;
+      flex-shrink: 0;
     }
     .lt-search svg { width: 14px; height: 14px; fill: #888; }
 
@@ -116,12 +124,11 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      width: 100%;
     }
 
     /* ===== MODULE 2: HEAD ===== */
-    .article-header {
-      padding: 24px 24px 0;
-    }
+    .article-header { padding: 24px 24px 0; }
     .article-tag {
       display: inline-block;
       background: #00b900;
@@ -140,10 +147,7 @@
       color: #111;
       margin-bottom: 14px;
     }
-    .article-title em {
-      color: #d00000;
-      font-style: normal;
-    }
+    .article-title em { color: #d00000; font-style: normal; }
     .article-subtitle {
       font-size: 16px;
       color: #555;
@@ -165,11 +169,7 @@
     .article-meta .author { color: #00b900; font-weight: 600; }
     .article-meta .views { display: flex; align-items: center; gap: 4px; }
     .article-meta .views svg { width: 13px; height: 13px; fill: #aaa; }
-    .share-row {
-      display: flex;
-      gap: 8px;
-      padding: 12px 0;
-    }
+    .share-row { display: flex; gap: 8px; padding: 12px 0; }
     .share-btn {
       display: flex;
       align-items: center;
@@ -186,448 +186,329 @@
     .share-btn svg  { width: 14px; height: 14px; fill: #fff; }
 
     /* ===== ARTICLE BODY ===== */
-    .article-body {
-      padding: 20px 24px 32px;
-    }
-    .article-body p {
-      margin-bottom: 18px;
-      font-size: 17px;
-      line-height: 1.9;
-      color: #333;
-    }
+    .article-body { padding: 20px 24px 32px; }
+    .article-body p { margin-bottom: 18px; font-size: 17px; line-height: 1.9; color: #333; }
     .article-body h2 {
-      font-size: 21px;
-      font-weight: 900;
-      color: #111;
-      margin: 32px 0 14px;
-      padding-left: 14px;
-      border-left: 5px solid #00b900;
+      font-size: 21px; font-weight: 900; color: #111;
+      margin: 32px 0 14px; padding-left: 14px; border-left: 5px solid #00b900;
     }
-    .article-body h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #222;
-      margin: 24px 0 10px;
-    }
+    .article-body h3 { font-size: 18px; font-weight: 700; color: #222; margin: 24px 0 10px; }
     .article-body strong { color: #d00000; }
     .article-body .highlight-box {
-      background: #f0fff0;
-      border: 1.5px solid #00b900;
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin: 20px 0;
-      font-size: 16px;
-      color: #1a5c1a;
+      background: #f0fff0; border: 1.5px solid #00b900; border-radius: 8px;
+      padding: 16px 20px; margin: 20px 0; font-size: 16px; color: #1a5c1a;
     }
     .article-body .highlight-box strong { color: #007700; }
     .article-body .warning-box {
-      background: #fff8f0;
-      border: 1.5px solid #e07000;
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin: 20px 0;
-      font-size: 16px;
-      color: #7a3800;
+      background: #fff8f0; border: 1.5px solid #e07000; border-radius: 8px;
+      padding: 16px 20px; margin: 20px 0; font-size: 16px; color: #7a3800;
     }
     .article-body .warning-box strong { color: #c05000; }
 
-    /* ===== MODULE 3: DOCTOR CARD ===== */
+    /* ===== DOCTOR CARD ===== */
     .doctor-card {
-      display: flex;
-      gap: 16px;
-      background: #f8fff8;
-      border: 1.5px solid #b2e0b2;
-      border-radius: 10px;
-      padding: 18px;
-      margin: 24px 0;
-      align-items: flex-start;
+      display: flex; gap: 16px; background: #f8fff8;
+      border: 1.5px solid #b2e0b2; border-radius: 10px;
+      padding: 18px; margin: 24px 0; align-items: flex-start;
     }
     .doctor-card img {
-      width: 90px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
-      border: 2px solid #00b900;
+      width: 90px; height: 110px; object-fit: cover;
+      border-radius: 8px; flex-shrink: 0; border: 2px solid #00b900;
     }
-    .doctor-info h4 {
-      font-size: 17px;
-      font-weight: 900;
-      color: #00b900;
-      margin-bottom: 4px;
-    }
-    .doctor-info .title {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 10px;
-      line-height: 1.6;
-    }
+    .doctor-info h4 { font-size: 17px; font-weight: 900; color: #00b900; margin-bottom: 4px; }
+    .doctor-info .title { font-size: 12px; color: #555; margin-bottom: 10px; line-height: 1.6; }
     .doctor-quote {
-      font-size: 15px;
-      color: #333;
-      font-style: italic;
-      border-left: 3px solid #00b900;
-      padding-left: 12px;
-      line-height: 1.7;
+      font-size: 15px; color: #333; font-style: italic;
+      border-left: 3px solid #00b900; padding-left: 12px; line-height: 1.7;
     }
 
     /* ===== ARTICLE IMAGE ===== */
-    .article-img-wrap {
-      margin: 20px 0;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .article-img-wrap img {
-      width: 100%;
-      height: auto;
-    }
-    .img-caption {
-      font-size: 12px;
-      color: #888;
-      text-align: center;
-      padding: 6px 0 0;
-    }
+    .article-img-wrap { margin: 20px 0; border-radius: 8px; overflow: hidden; }
+    .article-img-wrap img { width: 100%; height: auto; }
+    .img-caption { font-size: 12px; color: #888; text-align: center; padding: 6px 0 0; }
 
-    /* ===== MODULE 4: MISTAKE LIST ===== */
-    .mistake-list {
-      margin: 20px 0;
-    }
+    /* ===== MISTAKE LIST ===== */
+    .mistake-list { margin: 20px 0; }
     .mistake-item {
-      display: flex;
-      gap: 14px;
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      background: #fff5f5;
-      border-left: 5px solid #d00000;
-      align-items: flex-start;
+      display: flex; gap: 14px; padding: 16px; border-radius: 8px;
+      margin-bottom: 12px; background: #fff5f5; border-left: 5px solid #d00000; align-items: flex-start;
     }
-    .mistake-num {
-      font-size: 28px;
-      font-weight: 900;
-      color: #d00000;
-      line-height: 1;
-      flex-shrink: 0;
-      width: 36px;
-    }
-    .mistake-content h4 {
-      font-size: 16px;
-      font-weight: 700;
-      color: #d00000;
-      margin-bottom: 6px;
-    }
-    .mistake-content p {
-      font-size: 15px;
-      color: #555;
-      margin: 0;
-    }
+    .mistake-num { font-size: 28px; font-weight: 900; color: #d00000; line-height: 1; flex-shrink: 0; width: 36px; }
+    .mistake-content h4 { font-size: 16px; font-weight: 700; color: #d00000; margin-bottom: 6px; }
+    .mistake-content p { font-size: 15px; color: #555; margin: 0; }
 
-    /* ===== MODULE 5: PRODUCT ===== */
+    /* ===== PRODUCT ===== */
     .product-section {
       background: linear-gradient(135deg, #f0fff0 0%, #e8f5e8 100%);
-      border: 2px solid #00b900;
-      border-radius: 12px;
-      padding: 24px;
-      margin: 28px 0;
+      border: 2px solid #00b900; border-radius: 12px; padding: 24px; margin: 28px 0;
     }
-    .product-section h2 {
-      border-left: none;
-      padding-left: 0;
-      color: #007700;
-      font-size: 20px;
-      margin-top: 0;
-      margin-bottom: 16px;
-    }
-    .product-inner {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-    .product-img {
-      width: 160px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 16px rgba(0,150,0,.15);
-    }
+    .product-section h2 { border-left: none; padding-left: 0; color: #007700; font-size: 20px; margin-top: 0; margin-bottom: 16px; }
+    .product-inner { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+    .product-img { width: 160px; border-radius: 10px; flex-shrink: 0; box-shadow: 0 4px 16px rgba(0,150,0,.15); }
     .product-desc { flex: 1; min-width: 200px; }
-    .product-desc h3 {
-      font-size: 20px;
-      font-weight: 900;
-      color: #005500;
-      margin-bottom: 8px;
-    }
-    .product-desc .tagline {
-      font-size: 14px;
-      color: #007700;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-    .feature-list {
-      list-style: none;
-      padding: 0;
-    }
+    .product-desc h3 { font-size: 20px; font-weight: 900; color: #005500; margin-bottom: 8px; }
+    .product-desc .tagline { font-size: 14px; color: #007700; margin-bottom: 14px; font-weight: 600; }
+    .feature-list { list-style: none; padding: 0; }
     .feature-list li {
-      font-size: 15px;
-      color: #333;
-      padding: 5px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      font-size: 15px; color: #333; padding: 5px 0;
+      display: flex; align-items: flex-start; gap: 8px;
     }
-    .feature-list li::before {
-      content: "✅";
-      flex-shrink: 0;
-    }
+    .feature-list li::before { content: "✅"; flex-shrink: 0; }
 
-    /* ===== MODULE 6: COMPARE TABLE ===== */
-    .compare-wrap {
-      overflow-x: auto;
-      margin: 24px 0;
-    }
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    .compare-table th {
-      padding: 12px 14px;
-      text-align: center;
-      font-size: 15px;
-      font-weight: 700;
-    }
+    /* ===== COMPARE TABLE ===== */
+    .compare-wrap { overflow-x: auto; margin: 24px 0; -webkit-overflow-scrolling: touch; }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 300px; }
+    .compare-table th { padding: 12px 14px; text-align: center; font-size: 15px; font-weight: 700; }
     .compare-table th:first-child { background: #f5f5f5; color: #555; }
     .compare-table th:nth-child(2) { background: #ffe0e0; color: #c00; }
     .compare-table th:nth-child(3) { background: #00b900; color: #fff; }
-    .compare-table td {
-      padding: 11px 14px;
-      border-bottom: 1px solid #eee;
-      vertical-align: middle;
-    }
+    .compare-table td { padding: 11px 14px; border-bottom: 1px solid #eee; vertical-align: middle; }
     .compare-table td:first-child { font-weight: 600; color: #444; background: #fafafa; }
     .compare-table td:nth-child(2) { text-align: center; color: #c00; background: #fff8f8; }
     .compare-table td:nth-child(3) { text-align: center; color: #007700; background: #f0fff0; font-weight: 600; }
     .compare-table tr:last-child td { border-bottom: none; }
 
-    /* ===== MODULE 7: TESTIMONIALS ===== */
+    /* ===== TESTIMONIALS ===== */
     .testimonials { margin: 28px 0; }
     .testimonials h2 { font-size: 21px; font-weight: 900; color: #111; margin-bottom: 18px; padding-left: 14px; border-left: 5px solid #00b900; }
     .testi-card {
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      background: #fff; border: 1px solid #e0e0e0; border-radius: 10px;
+      padding: 18px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.05);
     }
-    .testi-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .testi-avatar {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #00b900;
-      flex-shrink: 0;
-    }
+    .testi-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .testi-avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid #00b900; flex-shrink: 0; }
     .testi-name { font-weight: 700; font-size: 15px; color: #222; }
     .testi-info { font-size: 12px; color: #888; margin-top: 2px; }
     .testi-stars { color: #f5a623; font-size: 14px; margin-bottom: 6px; }
     .testi-text { font-size: 15px; color: #444; line-height: 1.8; }
     .testi-text strong { color: #00b900; }
 
-    /* Line chat bubble style */
-    .line-chat-wrap {
-      background: #e8f5e8;
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 12px;
-    }
+    /* Line chat bubble */
+    .line-chat-wrap { background: #e8f5e8; border-radius: 10px; padding: 14px; margin-top: 12px; }
     .line-chat-header {
-      font-size: 11px;
-      color: #007700;
-      font-weight: 700;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      font-size: 11px; color: #007700; font-weight: 700; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 5px;
     }
     .line-chat-header::before {
-      content: "";
-      display: inline-block;
-      width: 16px; height: 16px;
-      background: #00b900;
-      border-radius: 4px;
+      content: ""; display: inline-block; width: 16px; height: 16px;
+      background: #00b900; border-radius: 4px;
     }
     .bubble-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-end; }
     .bubble-row.right { flex-direction: row-reverse; }
     .bubble-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-    .bubble {
-      max-width: 75%;
-      padding: 8px 12px;
-      border-radius: 14px;
-      font-size: 13px;
-      line-height: 1.6;
-    }
+    .bubble { max-width: 75%; padding: 8px 12px; border-radius: 14px; font-size: 13px; line-height: 1.6; }
     .bubble.left  { background: #fff; color: #333; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
     .bubble.right { background: #c8f5c8; color: #1a4d1a; border-bottom-right-radius: 4px; }
 
-    /* ===== MODULE 8: FAKE COMMENTS ===== */
-    .comments-section {
-      border-top: 1px solid #eee;
-      padding-top: 24px;
-      margin-top: 28px;
-    }
+    /* ===== FAKE COMMENTS ===== */
+    .comments-section { border-top: 1px solid #eee; padding-top: 24px; margin-top: 28px; }
     .comments-section h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 16px; font-weight: 700; color: #333; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
     }
     .comments-section h3 svg { width: 18px; height: 18px; fill: #1877f2; }
-    .comment-item {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-      align-items: flex-start;
-    }
-    .comment-avatar {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #ddd;
-    }
-    .comment-bubble {
-      background: #f0f2f5;
-      border-radius: 12px;
-      padding: 10px 14px;
-      flex: 1;
-    }
+    .comment-item { display: flex; gap: 10px; margin-bottom: 16px; align-items: flex-start; }
+    .comment-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: #ddd; }
+    .comment-bubble { background: #f0f2f5; border-radius: 12px; padding: 10px 14px; flex: 1; }
     .comment-name { font-size: 13px; font-weight: 700; color: #222; margin-bottom: 3px; }
     .comment-text { font-size: 14px; color: #444; line-height: 1.6; }
     .comment-text strong { color: #00b900; }
     .comment-meta { font-size: 11px; color: #aaa; margin-top: 5px; }
     .comment-reply {
-      background: #e8f5e8;
-      border-radius: 10px;
-      padding: 8px 12px;
-      margin-top: 6px;
-      font-size: 13px;
-      color: #1a5c1a;
-      border-left: 3px solid #00b900;
+      background: #e8f5e8; border-radius: 10px; padding: 8px 12px;
+      margin-top: 6px; font-size: 13px; color: #1a5c1a; border-left: 3px solid #00b900;
     }
     .comment-reply strong { color: #007700; }
 
-    /* ===== MODULE 9: CTA ===== */
-    .cta-section {
-      background: linear-gradient(135deg, #004d00 0%, #007700 50%, #00b900 100%);
-      padding: 36px 24px;
-      text-align: center;
-      margin-top: 32px;
-    }
-    .cta-section h2 {
-      font-size: 24px;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 8px;
-      border: none;
-      padding: 0;
-    }
-    .cta-section p {
-      font-size: 15px;
-      color: rgba(255,255,255,.85);
+    /* ===== PRODUCT DISPLAY IN ORDER SECTION ===== */
+    .pkg-product-display {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,.15);
+      border-radius: 12px;
+      padding: 16px;
       margin-bottom: 20px;
     }
-    .cta-badge {
-      display: inline-block;
-      background: #ffdd00;
-      color: #333;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 5px 16px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-    }
-    .cta-gifts {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-    .cta-gift {
-      background: rgba(255,255,255,.15);
-      border: 1.5px solid rgba(255,255,255,.4);
+    .pkg-product-img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
       border-radius: 10px;
-      padding: 12px 16px;
-      color: #fff;
-      font-size: 14px;
-      text-align: left;
-      min-width: 140px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,.6);
     }
-    .cta-gift .gift-icon { font-size: 22px; margin-bottom: 5px; }
-    .cta-gift .gift-name { font-weight: 700; font-size: 14px; }
-    .cta-gift .gift-desc { font-size: 12px; opacity: .8; margin-top: 2px; }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #fff;
-      color: #00b900;
+    .pkg-product-name {
       font-size: 18px;
       font-weight: 900;
-      padding: 16px 36px;
-      border-radius: 50px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .pkg-product-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .pkg-product-spec {
+      font-size: 12px;
+      color: #ffdd00;
+      font-weight: 600;
+    }
+
+    /* ===== PACKAGE SELECTOR ===== */
+    .package-section {
+      background: linear-gradient(135deg, #004d00 0%, #007700 50%, #00b900 100%);
+      padding: 32px 24px;
+      margin-top: 32px;
+    }
+    .package-section h2 {
+      font-size: 22px; font-weight: 900; color: #fff;
+      text-align: center; margin-bottom: 6px; border: none; padding: 0;
+    }
+    .package-section .sub { font-size: 14px; color: rgba(255,255,255,.85); text-align: center; margin-bottom: 20px; }
+    .package-cards { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+    .pkg-card {
+      background: rgba(255,255,255,.12);
+      border: 2px solid rgba(255,255,255,.35);
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
       cursor: pointer;
+      transition: all .2s;
+      flex: 1;
+      min-width: 130px;
+      max-width: 180px;
+      position: relative;
+    }
+    .pkg-card:hover { background: rgba(255,255,255,.22); transform: translateY(-2px); }
+    .pkg-card.selected {
+      background: #fff;
+      border-color: #ffdd00;
+      box-shadow: 0 0 0 3px #ffdd00;
+    }
+    .pkg-card.selected .pkg-name,
+    .pkg-card.selected .pkg-price { color: #005500; }
+    .pkg-card.selected .pkg-desc { color: #007700; }
+    .pkg-badge {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      background: #ffdd00; color: #333; font-size: 11px; font-weight: 700;
+      padding: 2px 10px; border-radius: 10px; white-space: nowrap;
+    }
+    .pkg-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .pkg-price { font-size: 24px; font-weight: 900; color: #ffdd00; line-height: 1.2; }
+    .pkg-price span { font-size: 13px; font-weight: 400; }
+    .pkg-desc { font-size: 12px; color: rgba(255,255,255,.75); margin-top: 4px; }
+    .pkg-card.selected .pkg-price { color: #00b900; }
+
+    /* ===== COD ORDER FORM ===== */
+    .order-form-wrap {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 4px;
+    }
+    .order-form-wrap h3 {
+      font-size: 17px; font-weight: 900; color: #005500;
+      margin-bottom: 16px; text-align: center;
+    }
+    .form-row { margin-bottom: 14px; }
+    .form-row label {
+      display: block; font-size: 13px; font-weight: 700;
+      color: #444; margin-bottom: 5px;
+    }
+    .form-row label span { color: #d00000; }
+    .form-row input,
+    .form-row select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #222;
+      background: #fff;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+    }
+    .form-row input:focus,
+    .form-row select:focus { border-color: #00b900; box-shadow: 0 0 0 2px rgba(0,185,0,.12); }
+    .form-row input.error,
+    .form-row select.error { border-color: #d00000; }
+    .form-row .select-wrap { position: relative; }
+    .form-row .select-wrap::after {
+      content: "▾";
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; pointer-events: none; font-size: 14px;
+    }
+    .form-addr-row { display: flex; gap: 10px; }
+    .form-addr-row .form-row { flex: 1; margin-bottom: 0; }
+    .form-error { font-size: 12px; color: #d00000; margin-top: 4px; display: none; }
+    .submit-btn {
+      width: 100%;
+      background: #d00000;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 16px;
+      border-radius: 50px;
       border: none;
-      box-shadow: 0 6px 20px rgba(0,0,0,.25);
-      transition: transform .15s, box-shadow .15s;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s, transform .15s;
+      font-family: inherit;
+    }
+    .submit-btn:hover { background: #b00000; transform: translateY(-1px); }
+    .submit-btn:disabled { background: #aaa; cursor: not-allowed; transform: none; }
+    .form-trust {
+      text-align: center; font-size: 12px; color: #888; margin-top: 10px; line-height: 1.8;
+    }
+    .form-trust strong { color: #007700; }
+
+    /* Success state */
+    .order-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .order-success .success-icon { font-size: 56px; margin-bottom: 12px; }
+    .order-success h3 { font-size: 20px; font-weight: 900; color: #005500; margin-bottom: 8px; }
+    .order-success p { font-size: 15px; color: #555; line-height: 1.8; }
+
+    /* ===== LINE CONSULT BUTTON ===== */
+    .line-consult-wrap {
+      text-align: center;
+      padding: 16px 24px 24px;
+      background: #f8fff8;
+      border-top: 1px solid #e0f0e0;
+    }
+    .line-consult-wrap p { font-size: 13px; color: #777; margin-bottom: 10px; }
+    .line-consult-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #00b900;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 30px;
       text-decoration: none;
     }
-    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.3); }
-    .cta-btn svg { width: 24px; height: 24px; fill: #00b900; }
-    .cta-note {
-      font-size: 12px;
-      color: rgba(255,255,255,.65);
-      margin-top: 14px;
-    }
-    /* Countdown */
-    .countdown-wrap {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 18px 0;
-    }
-    .countdown-box {
-      background: rgba(0,0,0,.3);
-      border-radius: 8px;
-      padding: 8px 14px;
-      text-align: center;
-      min-width: 60px;
-    }
-    .countdown-num {
-      font-size: 28px;
-      font-weight: 900;
-      color: #ffdd00;
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-    }
-    .countdown-label { font-size: 11px; color: rgba(255,255,255,.7); margin-top: 3px; }
-    .countdown-sep { font-size: 28px; font-weight: 900; color: #ffdd00; line-height: 1; align-self: center; padding-bottom: 14px; }
+    .line-consult-btn svg { width: 18px; height: 18px; fill: #fff; }
 
-    /* ===== STICKY BOTTOM CTA (mobile) ===== */
+    /* ===== STICKY BOTTOM CTA ===== */
     .sticky-cta {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      background: #00b900;
-      padding: 12px 20px;
+      background: #d00000;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -637,13 +518,14 @@
     .sticky-cta p { font-size: 13px; color: #fff; font-weight: 600; line-height: 1.4; }
     .sticky-cta a {
       background: #fff;
-      color: #00b900;
+      color: #d00000;
       font-size: 14px;
       font-weight: 900;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 30px;
       white-space: nowrap;
       flex-shrink: 0;
+      text-decoration: none;
     }
 
     /* ===== FOOTER ===== */
@@ -659,7 +541,8 @@
     .lt-footer a { color: #aaa; margin: 0 8px; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .article-wrap { margin: 8px; border-radius: 6px; }
       .article-title { font-size: 20px; }
       .article-body { padding: 16px 16px 24px; }
       .article-header { padding: 18px 16px 0; }
@@ -667,9 +550,15 @@
       .doctor-card img { width: 100%; height: 180px; }
       .product-inner { flex-direction: column; }
       .product-img { width: 100%; }
-      .cta-section { padding: 28px 16px; }
-      .cta-section h2 { font-size: 20px; }
       .lt-nav { display: none; }
+      .package-section { padding: 24px 16px; }
+      .package-section h2 { font-size: 19px; }
+      .pkg-card { min-width: 110px; padding: 14px 10px; }
+      .pkg-price { font-size: 20px; }
+      .order-form-wrap { padding: 18px 16px; }
+      .form-addr-row { flex-direction: column; gap: 14px; }
+      .sticky-cta p { font-size: 12px; }
+      .sticky-cta a { font-size: 13px; padding: 9px 14px; }
     }
   </style>
 
@@ -683,12 +572,12 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1253024356719604');
+    fbq('init', '1266757242198992');
     fbq('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1253024356719604&ev=PageView&noscript=1" />
+    src="https://www.facebook.com/tr?id=1266757242198992&ev=PageView&noscript=1" />
   </noscript>
   <!-- ===== End Facebook Pixel ===== -->
 </head>
@@ -743,7 +632,7 @@
     </p>
     <div class="article-meta">
       <span class="author">健康中心 / 綜合報導</span>
-      <span id="pub-date">2026年5月18日</span>
+      <span id="pub-date">2026年5月30日</span>
       <span class="views">
         <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
         <span id="view-count">127,438</span> 人觀看
@@ -763,25 +652,22 @@
 
   <!-- ===== ARTICLE BODY ===== -->
   <div class="article-body">
-
     <!-- Hero image -->
     <div class="article-img-wrap">
       <img src="pain_back.jpg" alt="長輩腰痛示意圖" />
       <p class="img-caption">▲ 長期腰痠背痛困擾著無數台灣中老年人，許多人以為「貼貼布就好」，卻不知這樣做反而延誤了調理時機。（示意圖）</p>
     </div>
-
     <p>
       你是否也有這樣的經驗：腰痠了，貼一片；膝蓋痛了，貼一片；肩頸僵硬，再貼一片。貼了又撕，撕了又貼，<strong>痛了幾年、貼了幾年，卻始終沒有真正好過？</strong>
     </p>
     <p>
       根據台灣藥品市場調查，台灣人每年消耗的痠痛貼布超過 <strong>4 億片</strong>，平均每位成年人一年貼掉近 20 片。然而，骨骼與關節問題的就診人次，卻逐年攀升，不減反增。
     </p>
-
     <div class="warning-box">
       <strong>⚠️ 醫師警告：</strong>長期依賴市售涼感貼布，不僅無法解決深層問題，反而可能因為「貼錯位置」或「貼法錯誤」，導致皮膚過敏、局部血液循環受阻，讓痛症更難根治。
     </div>
 
-    <!-- ===== MODULE 3: DOCTOR CARD ===== -->
+    <!-- ===== DOCTOR CARD ===== -->
     <div class="doctor-card">
       <img src="doctor.jpg" alt="彭溫雅醫師" />
       <div class="doctor-info">
@@ -797,149 +683,90 @@
       </div>
     </div>
 
-    <!-- ===== MODULE 4: 3 MISTAKES ===== -->
-    <h2>你一直在犯的 3 個止痛錯誤</h2>
-    <p>彭溫雅醫師在診間接診了無數長期痠痛患者，她發現，<strong>九成以上的人都在重複同樣的錯誤</strong>。這些錯誤，正是讓你的痛症永遠好不了的真正原因。</p>
-
+    <!-- ===== 3 MISTAKES ===== -->
+    <h2>台灣人貼了幾十年，卻犯了這 3 個致命錯誤</h2>
     <div class="mistake-list">
       <div class="mistake-item">
         <div class="mistake-num">01</div>
         <div class="mistake-content">
-          <h4>只貼「痛的地方」，沒找到真正的痛源</h4>
-          <p>腰痛不一定源自腰部，可能是臀部梨狀肌緊繃、骨盆歪斜所致。膝蓋痛，根源往往在髖關節或大腿筋膜。<strong>貼錯位置，等於白貼。</strong>中醫強調「循經取穴」，必須找到對應的穴位與經絡，才能真正疏通。</p>
+          <h4>只治標、不治本：涼感貼布只麻痺神經</h4>
+          <p>市售涼感貼布的主要成分是薄荷醇與水楊酸甲酯，作用原理是「讓你感覺不痛」，而非真正消除炎症或修復組織。撕掉貼布，疼痛立刻回來。</p>
         </div>
       </div>
       <div class="mistake-item">
         <div class="mistake-num">02</div>
         <div class="mistake-content">
-          <h4>用「涼感貼布」處理「寒性痛症」，越貼越寒</h4>
-          <p>台灣中老年人最常見的是「寒濕型」痠痛——下雨天加重、受涼後發作、熱敷後舒緩。這類痛症的本質是<strong>寒邪入侵、氣血不通</strong>。涼感貼布含薄荷、冰片等寒涼成分，<strong>等於用冰塊敷凍傷，雪上加霜。</strong></p>
+          <h4>貼錯位置：哪裡痛貼哪裡是大錯誤</h4>
+          <p>中醫理論中，痛點往往不是病根所在。膝蓋痛的根源可能在腎虛；腰痛的根源可能在膀胱經堵塞。直接貼痛點，等於隔靴搔癢。</p>
         </div>
       </div>
       <div class="mistake-item">
         <div class="mistake-num">03</div>
         <div class="mistake-content">
-          <h4>治標不治本，沒有深層滲透的「調理」概念</h4>
-          <p>市售貼布的有效成分，大多只能滲透至皮下 2–3 毫米，無法到達深層肌肉、筋膜與關節腔。<strong>真正的調理，需要能深層滲透、拔除寒濕、活血通絡的草本配方</strong>，才能從根本改善痛症體質。</p>
+          <h4>不拔寒濕：深層寒氣一日不除，痛症一日不止</h4>
+          <p>台灣氣候潮濕，加上長期吹冷氣、喝冰飲，寒濕之邪深入骨骼關節。普通貼布無法穿透深層，寒濕不拔，痛症永遠反覆。</p>
         </div>
       </div>
     </div>
 
-    <div class="article-img-wrap">
-      <img src="patch_apply.jpg" alt="正確貼法示意" />
-      <p class="img-caption">▲ 正確的貼法與穴位選擇，是決定膏藥貼效果的關鍵。（示意圖）</p>
-    </div>
-
-    <h2>深層寒濕，才是痛症的真正元兇</h2>
-    <p>
-      彭溫雅醫師解釋，台灣氣候潮濕，加上許多人長期吹冷氣、喝冰飲，導致<strong>寒濕之邪極易積聚於關節、筋骨之間</strong>。這些寒濕日積月累，阻礙氣血運行，形成「痹阻」，就是中醫所說的「不通則痛」。
-    </p>
-    <p>
-      「很多患者問我，為什麼每次天氣變化就痛起來？」彭醫師說，「因為寒濕在體內，遇到外在的濕冷氣候，就像磁鐵相吸，<strong>痛症自然加重。</strong>這不是老化，這是寒濕體質的警訊。」
-    </p>
-
-    <div class="highlight-box">
-      <strong>💡 中醫核心觀念：</strong>「通則不痛，痛則不通。」痠痛的根本，在於氣血不通、寒濕阻滯。真正有效的調理，必須做到「溫經散寒、活血通絡、拔濕止痛」，才能讓氣血重新暢通，痛症自然消退。<strong>藏藥非遺膏貼正是依循此原理，以西藏高原古法草本藥材為核心，深層滲透、直達痛點。</strong>
-    </div>
-
-    <!-- ===== MODULE 5: PRODUCT ===== -->
+    <!-- ===== PRODUCT SECTION ===== -->
     <div class="product-section">
-      <h2>🌿 200年古法傳承，藏藥非遺的深層調理解方</h2>
+      <h2>🌿 為什麼藏藥非遺透骨膏貼不一樣？</h2>
       <div class="product-inner">
         <img class="product-img" src="product.jpg" alt="藏藥非遺透骨膏貼" />
         <div class="product-desc">
           <h3>藏藥非遺透骨膏貼</h3>
-          <p class="tagline">源自西藏200年古法傳承 · 藏藥非物質文化遺產配方</p>
+          <p class="tagline">源自藏醫非物質文化遺產 · 深層透骨 · 拔寒除濕</p>
           <ul class="feature-list">
-            <li>獨家「藏藥溫經拔濕」複方，有效成分深層滲透至肌肉、筋膜與關節腔</li>
-            <li>精選藏區高原草本藥材，不含化學止痛劑，溫和不傷皮膚</li>
-            <li>一盒10貼，多部位適用——腰腿痛、肩周不適、頸椎不適，哪痛貼哪</li>
-            <li>透氣親膚材質，適合台灣潮濕氣候，長效貼附不脫落</li>
-            <li><strong>加入 Line 即獲：專屬調理師一對一穴位貼法指導</strong></li>
+            <li>採用藏區高原珍稀草本，滲透力強，直達骨骼深層</li>
+            <li>依中醫穴位理論設計，貼對位置才能真正調理</li>
+            <li>溫熱型配方，專攻寒濕型痛症（天氣變化加重者尤其有效）</li>
+            <li>每盒 10 貼，一個部位建議連貼 5–7 天為一療程</li>
+            <li>無刺激性氣味，不影響日常生活</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- ===== MODULE 6: COMPARE TABLE ===== -->
-    <h2>一眼看清楚：為什麼不一樣？</h2>
+    <!-- ===== COMPARE TABLE ===== -->
+    <h2>一張表看清楚：為什麼換了就不想換回去</h2>
     <div class="compare-wrap">
       <table class="compare-table">
         <thead>
           <tr>
             <th>比較項目</th>
-            <th>❌ 傳統市售貼布</th>
-            <th>✅ 藏藥非遺透骨膏貼</th>
+            <th>市售涼感貼布</th>
+            <th>藏藥非遺透骨膏貼</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>滲透深度</td>
-            <td>僅達皮下 2–3mm</td>
-            <td>深達肌肉、筋膜與關節層</td>
-          </tr>
-          <tr>
-            <td>成分性質</td>
-            <td>化學止痛劑（涼感/熱感）</td>
-            <td>藏藥非遺草本複方，溫經活血拔濕</td>
-          </tr>
-          <tr>
-            <td>適合體質</td>
-            <td>不分體質，一律涼感</td>
-            <td>200年古法，針對寒濕痹痛體質</td>
-          </tr>
-          <tr>
-            <td>皮膚刺激</td>
-            <td>容易過敏、起水泡、紅腫</td>
-            <td>親膚透氣，敏感肌亦適用</td>
-          </tr>
-          <tr>
-            <td>專業指導</td>
-            <td>自己亂貼，效果不穩定</td>
-            <td>加 Line 即獲專屬穴位調理方案</td>
-          </tr>
+          <tr><td>作用深度</td><td>表皮層（麻痺感覺）</td><td>深入骨骼肌肉層</td></tr>
+          <tr><td>針對病因</td><td>❌ 只治標</td><td>✅ 拔寒除濕治根本</td></tr>
+          <tr><td>適合體質</td><td>熱性痛（紅腫熱痛）</td><td>寒濕型痛（遇冷加重）</td></tr>
+          <tr><td>穴位貼法</td><td>❌ 哪痛貼哪裡</td><td>✅ 依穴位精準調理</td></tr>
+          <tr><td>持續效果</td><td>撕掉即消失</td><td>累積調理，逐步改善</td></tr>
+          <tr><td>皮膚刺激</td><td>部分人過敏</td><td>草本溫和配方</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ===== MODULE 7: TESTIMONIALS ===== -->
+    <!-- ===== TESTIMONIALS ===== -->
     <div class="testimonials">
-      <h2>真實用戶見證</h2>
-
+      <h2>真實用戶回饋</h2>
       <!-- Testimonial 1 -->
       <div class="testi-card">
         <div class="testi-header">
-          <img class="testi-avatar" src="avatar1.jpg" alt="陳阿姨" />
+          <img class="testi-avatar" src="avatar1.jpg" alt="陳女士" />
           <div>
-            <div class="testi-name">陳美珠（65歲，台中）</div>
+            <div class="testi-name">陳美玲（62歲，台中）</div>
             <div class="testi-info">退休教師 · 膝蓋痛困擾 8 年</div>
             <div class="testi-stars">★★★★★</div>
           </div>
         </div>
         <p class="testi-text">
-          我膝蓋痛了八年，西醫說要換人工關節，我不敢開刀。試過各種貼布、吃過各種保健品，都沒用。後來加了他們的 Line，調理師問了我很多問題，說我是典型的<strong>「寒濕型膝痛」</strong>，推薦我用藏藥非遺膏貼，教我貼在委中穴和陰陵泉穴。第三天，我就覺得膝蓋不那麼卡了。現在每天早上可以去公園走路了，<strong>真的感謝！</strong>
+          我膝蓋痛了八年，西醫說要換人工關節，我不敢開刀。試過各種貼布、吃過各種保健品，都沒用。後來在網路上看到這個，抱著試試看的心態訂了三盒。按照說明貼在委中穴和陰陵泉穴，<strong>第三天就覺得膝蓋不那麼卡了。</strong>現在每天早上可以去公園走路了，真的感謝！
         </p>
-        <div class="line-chat-wrap">
-          <div class="line-chat-header">LINE 諮詢對話紀錄</div>
-          <div class="bubble-row">
-            <img class="bubble-avatar" src="avatar1.jpg" alt="" />
-            <div class="bubble left">調理師你好，我膝蓋痛了很多年，之前貼的貼布都沒什麼效果…</div>
-          </div>
-          <div class="bubble-row right">
-            <img class="bubble-avatar" src="advisor.jpg" alt="" />
-            <div class="bubble right">陳姐您好！請問您的膝蓋痛，是天氣變化時會加重嗎？熱敷後有沒有比較舒服？</div>
-          </div>
-          <div class="bubble-row">
-            <img class="bubble-avatar" src="avatar1.jpg" alt="" />
-            <div class="bubble left">對！下雨天特別痛，熱敷會好一點點</div>
-          </div>
-          <div class="bubble-row right">
-            <img class="bubble-avatar" src="advisor.jpg" alt="" />
-            <div class="bubble right">這是典型的寒濕型膝痛 💚 我送您藏藥非遺膏貼的專屬穴位貼法指導，效果會差很多的！</div>
-          </div>
-        </div>
       </div>
-
       <!-- Testimonial 2 -->
       <div class="testi-card">
         <div class="testi-header">
@@ -951,10 +778,9 @@
           </div>
         </div>
         <p class="testi-text">
-          做工地的，腰是職業傷害。以前每天都要貼一片涼感貼布，貼了五年，腰還是一樣痛。加了 Line 之後，調理師說我<strong>貼的位置完全貼錯了</strong>，而且涼感貼布對我這種寒性腰痛根本沒用。換了藏藥非遺膏貼，按照調理師說的穴位貼法，<strong>一個禮拜後，早上起床不再需要扶牆站起來了。</strong>
+          做工地的，腰是職業傷害。以前每天都要貼一片涼感貼布，貼了五年，腰還是一樣痛。換了藏藥非遺膏貼，按照說明的穴位貼法，<strong>一個禮拜後，早上起床不再需要扶牆站起來了。</strong>現在已經回購第三次了。
         </p>
       </div>
-
       <!-- Testimonial 3 -->
       <div class="testi-card">
         <div class="testi-header">
@@ -966,29 +792,27 @@
           </div>
         </div>
         <p class="testi-text">
-          我女兒幫我加的 Line。調理師問了我的生活習慣，說我長期吹冷氣、喝冰飲，寒氣都積在肩頸了。教我用藏藥非遺膏貼貼在大椎穴和肩井穴，還叫我睡覺時不要對著冷氣吹。<strong>兩個禮拜後，頭不再那麼昏，肩膀也輕鬆多了。</strong>真的很感謝有這樣的服務，不用出門就有人指導。
+          我女兒幫我訂的。說明書上教我貼在大椎穴和肩井穴，還提醒我睡覺時不要對著冷氣吹。<strong>兩個禮拜後，頭不再那麼昏，肩膀也輕鬆多了。</strong>真的很方便，不用出門就送到家，貨到才付款也很安心。
         </p>
       </div>
     </div>
 
-    <!-- ===== MODULE 8: FAKE COMMENTS ===== -->
+    <!-- ===== FAKE COMMENTS ===== -->
     <div class="comments-section">
       <h3>
         <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         網友留言（共 284 則）
       </h3>
-
       <div class="comment-item">
         <img class="comment-avatar" src="c1.jpg" alt="" />
         <div>
           <div class="comment-bubble">
             <div class="comment-name">黃雅婷</div>
-            <div class="comment-text">我媽媽用了！真的有差！她膝蓋痛十幾年，西醫說要開刀，我不放心讓她開。加了 Line 之後調理師很有耐心，一直回覆我們的問題。<strong>現在媽媽每天都去散步了，真的很開心！</strong></div>
+            <div class="comment-text">我媽媽用了！真的有差！她膝蓋痛十幾年，西醫說要開刀，我不放心讓她開。<strong>現在媽媽每天都去散步了，真的很開心！</strong>而且貨到付款很方便，不用先匯款。</div>
             <div class="comment-meta">讚 · 218 · 2小時前</div>
           </div>
         </div>
       </div>
-
       <div class="comment-item">
         <img class="comment-avatar" src="c2.jpg" alt="" />
         <div>
@@ -997,94 +821,139 @@
             <div class="comment-text">請問在哪裡可以買？我老婆腰痛很久了，試了很多方法都沒用，想讓她試試看。</div>
             <div class="comment-meta">讚 · 47 · 3小時前</div>
             <div class="comment-reply">
-              <strong>💬 小編回覆：</strong>張先生您好！請直接點擊文章下方的綠色按鈕加入 Line 官方帳號，調理師會先幫您太太做免費的體質與痛點評估，再建議最適合的調理方案喔！
+              <strong>💬 小編回覆：</strong>張先生您好！直接在文章下方填寫收件資訊就可以訂購，貨到付款，收到貨再付錢，非常方便！
             </div>
           </div>
         </div>
       </div>
-
       <div class="comment-item">
         <img class="comment-avatar" src="c3.jpg" alt="" />
         <div>
           <div class="comment-bubble">
-            <div class="comment-name">李明珠</div>
-            <div class="comment-text">我是那種一到下雨天就全身痠痛的人，加了 Line 之後調理師說我就是寒濕體質，教我怎麼貼、貼哪裡。<strong>用了兩週，這次下雨天居然沒那麼痛了！</strong>真的很神奇。</div>
-            <div class="comment-meta">讚 · 163 · 5小時前</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="comment-item">
-        <img class="comment-avatar" src="c4.jpg" alt="" />
-        <div>
-          <div class="comment-bubble">
-            <div class="comment-name">陳志豪</div>
-            <div class="comment-text">這個 Line 諮詢服務真的很貼心，調理師回覆很快，而且不會一直推銷，真的是先了解你的狀況再給建議。<strong>感覺比去診所排隊還方便！</strong></div>
-            <div class="comment-meta">讚 · 89 · 8小時前</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="comment-item">
-        <img class="comment-avatar" src="c5.jpg" alt="" />
-        <div>
-          <div class="comment-bubble">
-            <div class="comment-name">吳秀蘭</div>
-            <div class="comment-text">我 68 歲，肩膀痛了快 15 年，去過很多地方都說沒辦法。加了 Line 之後，調理師說我的問題是長期寒氣積聚，教我用草本貼貼在幾個穴位上。<strong>第一次貼完，晚上睡覺肩膀就沒那麼緊了。</strong>繼續用中，希望能越來越好！</div>
+            <div class="comment-name">李秀蘭</div>
+            <div class="comment-text">我肩膀痛了好幾年，貼了第一盒就感覺有差，<strong>第一次貼完，晚上睡覺肩膀就沒那麼緊了。</strong>繼續用中，希望能越來越好！</div>
             <div class="comment-meta">讚 · 201 · 昨天</div>
           </div>
         </div>
       </div>
     </div>
-
   </div><!-- end article-body -->
 
-  <!-- ===== MODULE 9: CTA ===== -->
-  <div class="cta-section">
-    <div class="cta-badge">⏰ 限時優惠 · 名額有限</div>
-    <h2>立即加入 Line，免費獲取<br>一對一痛症評估與調理指導</h2>
-    <p>告訴我們您的痛點部位與症狀，調理師將為您量身規劃最適合的草本貼法方案</p>
+  <!-- ===== PACKAGE + ORDER FORM ===== -->
+  <div class="package-section" id="order-section">
+    <!-- Product Display -->
+    <div class="pkg-product-display">
+      <img src="product.jpg" alt="藏藥非遺透骨膏貼" class="pkg-product-img" />
+      <div class="pkg-product-info">
+        <div class="pkg-product-name">藏藥非遺透骨膏貼</div>
+        <div class="pkg-product-sub">源自藏醫非物質文化遺產 · 深層透骨 · 拔寒除濕</div>
+        <div class="pkg-product-spec">📦 每盒 10 貼 · 貨到付款 · 宅配到府</div>
+      </div>
+    </div>
+    <h2>🌿 選擇您的套餐，貨到付款</h2>
+    <p class="sub">填寫收件資料，宅配到府，收到貨再付款</p>
 
-    <div class="cta-gifts">
-      <div class="cta-gift">
-        <div class="gift-icon">📋</div>
-        <div class="gift-name">免費體質評估</div>
-        <div class="gift-desc">一對一痛症根源分析</div>
+    <!-- Package Cards -->
+    <div class="package-cards">
+      <div class="pkg-card" data-pkg="一盒套餐" data-price="NT$980" onclick="selectPkg(this)">
+        <div class="pkg-name">一盒套餐</div>
+        <div class="pkg-price">980<span> 元</span></div>
+        <div class="pkg-desc">10貼/盒 × 1</div>
       </div>
-      <div class="cta-gift">
-        <div class="gift-icon">📖</div>
-        <div class="gift-name">居家調理指南</div>
-        <div class="gift-desc">電子書免費領取</div>
+      <div class="pkg-card selected" data-pkg="三盒套餐" data-price="NT$1,398" onclick="selectPkg(this)">
+        <div class="pkg-badge">🔥 最多人選</div>
+        <div class="pkg-name">三盒套餐</div>
+        <div class="pkg-price">1,398<span> 元</span></div>
+        <div class="pkg-desc">10貼/盒 × 3</div>
       </div>
-      <div class="cta-gift">
-        <div class="gift-icon">🎁</div>
-        <div class="gift-name">首購專屬折扣</div>
-        <div class="gift-desc">加好友限定優惠碼</div>
+      <div class="pkg-card" data-pkg="七盒套餐" data-price="NT$1,998" onclick="selectPkg(this)">
+        <div class="pkg-badge">💎 超值首選</div>
+        <div class="pkg-name">七盒套餐</div>
+        <div class="pkg-price">1,998<span> 元</span></div>
+        <div class="pkg-desc">10貼/盒 × 7</div>
       </div>
     </div>
 
-    <p style="color:rgba(255,255,255,.9); font-size:14px; margin-bottom:8px;">⚡ 本優惠剩餘名額倒數：</p>
-    <div class="countdown-wrap">
-      <div class="countdown-box"><div class="countdown-num" id="cd-h">02</div><div class="countdown-label">小時</div></div>
-      <div class="countdown-sep">:</div>
-      <div class="countdown-box"><div class="countdown-num" id="cd-m">47</div><div class="countdown-label">分鐘</div></div>
-      <div class="countdown-sep">:</div>
-      <div class="countdown-box"><div class="countdown-num" id="cd-s">33</div><div class="countdown-label">秒</div></div>
-    </div>
+    <!-- Order Form -->
+    <div class="order-form-wrap">
+      <h3>📦 填寫收件資料（貨到付款）</h3>
 
-    <a href="https://line.me/ti/p/N9Cdm_gEAA" class="cta-btn" target="_blank">
+      <div id="order-form">
+        <div class="form-row">
+          <label>姓名 <span>*</span></label>
+          <input type="text" id="f-name" placeholder="請輸入您的姓名" autocomplete="name" />
+          <div class="form-error" id="err-name">請填寫姓名</div>
+        </div>
+        <div class="form-row">
+          <label>手機號碼 <span>*</span></label>
+          <input type="tel" id="f-phone" placeholder="09xxxxxxxx" autocomplete="tel" maxlength="10" />
+          <div class="form-error" id="err-phone">請填寫正確的手機號碼（09 開頭，10 碼）</div>
+        </div>
+        <div class="form-addr-row">
+          <div class="form-row">
+            <label>縣市 <span>*</span></label>
+            <div class="select-wrap">
+              <select id="f-city" onchange="updateDistricts()">
+                <option value="">請選擇縣市</option>
+              </select>
+            </div>
+            <div class="form-error" id="err-city">請選擇縣市</div>
+          </div>
+          <div class="form-row">
+            <label>鄉鎮市區 <span>*</span></label>
+            <div class="select-wrap">
+              <select id="f-district">
+                <option value="">請先選擇縣市</option>
+              </select>
+            </div>
+            <div class="form-error" id="err-district">請選擇鄉鎮市區</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>詳細地址 <span>*</span></label>
+          <input type="text" id="f-address" placeholder="路/街、巷、弄、號、樓" autocomplete="street-address" />
+          <div class="form-error" id="err-address">請填寫詳細地址</div>
+        </div>
+        <div class="form-row">
+          <label>選擇套餐 <span>*</span></label>
+          <div class="select-wrap">
+            <select id="f-package">
+              <option value="一盒套餐 NT$980">一盒套餐 — NT$980（10貼/盒 × 1）</option>
+              <option value="三盒套餐 NT$1,398" selected>三盒套餐 — NT$1,398（10貼/盒 × 3）🔥 最多人選</option>
+              <option value="七盒套餐 NT$1,998">七盒套餐 — NT$1,998（10貼/盒 × 7）💎 超值首選</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitOrder()">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          確認下單 · 貨到付款
+        </button>
+        <p class="form-trust">
+          <strong>✅ 貨到才付款</strong> · <strong>✅ 不滿意可拒收</strong> · <strong>✅ 宅配到府</strong><br>
+          預計 <strong>3–5 個工作天</strong>宅配到府
+        </p>
+      </div>
+
+      <!-- Success Message (redirect handled by JS) -->
+    </div>
+  </div>
+
+  <!-- LINE 備用諮詢 -->
+  <div class="line-consult-wrap">
+    <p>有任何問題？也可以直接加 LINE 詢問</p>
+    <a href="https://line.me/ti/p/N9Cdm_gEAA" class="line-consult-btn" target="_blank" id="line-btn">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.7 1.3 5.12 3.36 6.83L4.5 22l4.36-2.27A10.7 10.7 0 0012 20c5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
-      👉 點擊這裡，立即加 Line 免費評估
+      加 LINE 諮詢藏藥透骨膏貼
     </a>
-    <p class="cta-note">加入完全免費 · 無強迫消費 · 調理師在線即時回覆</p>
   </div>
 
 </main>
 
 <!-- ===== STICKY BOTTOM CTA ===== -->
 <div class="sticky-cta">
-  <p>🌿 免費痛症評估<br><span style="font-size:11px;opacity:.85;">調理師一對一指導，立即諮詢</span></p>
-  <a href="https://line.me/ti/p/N9Cdm_gEAA" target="_blank">加 LINE 免費諮詢 →</a>
+  <p>🌿 藏藥非遺透骨膏貼<br><span style="font-size:11px;opacity:.85;">貨到付款 · 宅配到府</span></p>
+  <a href="#order-section" id="sticky-order-btn" onclick="stickyOrderClick(event)">立即下單 →</a>
 </div>
 
 <!-- ===== FOOTER ===== -->
@@ -1095,7 +964,170 @@
 
 <!-- ===== SCRIPTS ===== -->
 <script>
-  // Dynamic view count
+  // ===== Taiwan Districts Data =====
+  var TW_DISTRICTS = {
+    '臺北市': ['中正區','大同區','中山區','萬華區','信義區','松山區','大安區','南港區','北投區','內湖區','士林區','文山區'],
+    '新北市': ['板橋區','新莊區','泰山區','林口區','淡水區','金山區','八里區','萬里區','石門區','三芝區','瑞芳區','汐止區','平溪區','貢寮區','雙溪區','深坑區','石碇區','新店區','坪林區','烏來區','中和區','永和區','土城區','三峽區','樹林區','鶯歌區','三重區','蘆洲區','五股區'],
+    '基隆市': ['仁愛區','中正區','信義區','中山區','安樂區','暖暖區','七堵區'],
+    '桃園市': ['桃園區','中壢區','平鎮區','八德區','楊梅區','蘆竹區','龜山區','龍潭區','大溪區','大園區','觀音區','新屋區','復興區'],
+    '新竹市': ['東區','北區','香山區'],
+    '新竹縣': ['竹北市','竹東鎮','新埔鎮','關西鎮','峨眉鄉','寶山鄉','北埔鄉','橫山鄉','芎林鄉','湖口鄉','新豐鄉','尖石鄉','五峰鄉'],
+    '苗栗縣': ['苗栗市','通霄鎮','苑裡鎮','竹南鎮','頭份市','後龍鎮','卓蘭鎮','西湖鄉','頭屋鄉','公館鄉','銅鑼鄉','三義鄉','造橋鄉','三灣鄉','南庄鄉','大湖鄉','獅潭鄉','泰安鄉'],
+    '臺中市': ['中區','東區','南區','西區','北區','北屯區','西屯區','南屯區','太平區','大里區','霧峰區','烏日區','豐原區','后里區','東勢區','石岡區','新社區','和平區','神岡區','潭子區','大雅區','大肚區','龍井區','沙鹿區','梧棲區','清水區','大甲區','外埔區','大安區'],
+    '彰化縣': ['彰化市','員林市','和美鎮','鹿港鎮','溪湖鎮','二林鎮','田中鎮','北斗鎮','花壇鄉','芬園鄉','大村鄉','永靖鄉','伸港鄉','線西鄉','福興鄉','秀水鄉','埔心鄉','埔鹽鄉','大城鄉','芳苑鄉','竹塘鄉','社頭鄉','二水鄉','田尾鄉','埤頭鄉','溪州鄉'],
+    '南投縣': ['南投市','埔里鎮','草屯鎮','竹山鎮','集集鎮','名間鄉','鹿谷鄉','中寮鄉','魚池鄉','國姓鄉','水里鄉','信義鄉','仁愛鄉'],
+    '雲林縣': ['斗六市','斗南鎮','虎尾鎮','西螺鎮','土庫鎮','北港鎮','莿桐鄉','林內鄉','古坑鄉','大埤鄉','崙背鄉','二崙鄉','麥寮鄉','臺西鄉','東勢鄉','褒忠鄉','四湖鄉','口湖鄉','水林鄉','元長鄉'],
+    '嘉義市': ['東區','西區'],
+    '嘉義縣': ['太保市','朴子市','布袋鎮','大林鎮','民雄鄉','溪口鄉','新港鄉','六腳鄉','東石鄉','義竹鄉','鹿草鄉','水上鄉','中埔鄉','竹崎鄉','梅山鄉','番路鄉','大埔鄉','阿里山鄉'],
+    '臺南市': ['中西區','東區','南區','北區','安平區','安南區','永康區','歸仁區','新化區','左鎮區','玉井區','楠西區','南化區','仁德區','關廟區','龍崎區','官田區','麻豆區','佳里區','西港區','七股區','將軍區','學甲區','北門區','新營區','後壁區','白河區','東山區','六甲區','下營區','柳營區','鹽水區','善化區','大內區','山上區','新市區','安定區'],
+    '高雄市': ['楠梓區','左營區','鼓山區','三民區','鹽埕區','前金區','新興區','苓雅區','前鎮區','小港區','旗津區','鳳山區','大寮區','鳥松區','林園區','仁武區','大樹區','大社區','岡山區','路竹區','橋頭區','梓官區','彌陀區','永安區','燕巢區','田寮區','阿蓮區','茄萣區','湖內區','旗山區','美濃區','內門區','杉林區','甲仙區','六龜區','茂林區','桃源區','那瑪夏區'],
+    '屏東縣': ['屏東市','潮州鎮','東港鎮','恆春鎮','萬丹鄉','長治鄉','麟洛鄉','九如鄉','里港鄉','鹽埔鄉','高樹鄉','萬巒鄉','內埔鄉','竹田鄉','新埤鄉','枋寮鄉','新園鄉','崁頂鄉','林邊鄉','南州鄉','佳冬鄉','琉球鄉','車城鄉','滿州鄉','枋山鄉','霧台鄉','瑪家鄉','泰武鄉','來義鄉','春日鄉','獅子鄉','牡丹鄉','三地門鄉'],
+    '宜蘭縣': ['宜蘭市','羅東鎮','蘇澳鎮','頭城鎮','礁溪鄉','壯圍鄉','員山鄉','冬山鄉','五結鄉','三星鄉','大同鄉','南澳鄉'],
+    '花蓮縣': ['花蓮市','鳳林鎮','玉里鎮','新城鄉','吉安鄉','壽豐鄉','秀林鄉','光復鄉','豐濱鄉','瑞穗鄉','萬榮鄉','富里鄉','卓溪鄉'],
+    '臺東縣': ['臺東市','成功鎮','關山鎮','長濱鄉','海端鄉','池上鄉','東河鄉','鹿野鄉','延平鄉','卑南鄉','金峰鄉','大武鄉','達仁鄉','綠島鄉','蘭嶼鄉','太麻里鄉'],
+    '澎湖縣': ['馬公市','湖西鄉','白沙鄉','西嶼鄉','望安鄉','七美鄉'],
+    '金門縣': ['金城鎮','金湖鎮','金沙鎮','金寧鄉','烈嶼鄉','烏坵鄉'],
+    '連江縣': ['南竿鄉','北竿鄉','莒光鄉','東引鄉']
+  };
+
+  // Init city dropdown
+  (function(){
+    var citySelect = document.getElementById('f-city');
+    Object.keys(TW_DISTRICTS).forEach(function(city){
+      var opt = document.createElement('option');
+      opt.value = city;
+      opt.textContent = city;
+      citySelect.appendChild(opt);
+    });
+  })();
+
+  // Update district dropdown when city changes
+  function updateDistricts() {
+    var city = document.getElementById('f-city').value;
+    var distSelect = document.getElementById('f-district');
+    distSelect.innerHTML = '';
+    if (!city) {
+      distSelect.innerHTML = '<option value="">請先選擇縣市</option>';
+      return;
+    }
+    var districts = TW_DISTRICTS[city] || [];
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = '請選擇鄉鎮市區';
+    distSelect.appendChild(placeholder);
+    districts.forEach(function(d){
+      var opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = d;
+      distSelect.appendChild(opt);
+    });
+  }
+
+  // Sync package card selection with select dropdown
+  function selectPkg(card) {
+    document.querySelectorAll('.pkg-card').forEach(function(c){ c.classList.remove('selected'); });
+    card.classList.add('selected');
+    var pkgVal = card.getAttribute('data-pkg');
+    var sel = document.getElementById('f-package');
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value.indexOf(pkgVal) === 0) {
+        sel.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  // Sync select dropdown back to cards
+  document.getElementById('f-package').addEventListener('change', function(){
+    var val = this.value;
+    document.querySelectorAll('.pkg-card').forEach(function(c){
+      c.classList.remove('selected');
+      if (val.indexOf(c.getAttribute('data-pkg')) === 0) c.classList.add('selected');
+    });
+  });
+
+  // Form validation & submit
+  function submitOrder() {
+    var name    = document.getElementById('f-name').value.trim();
+    var phone   = document.getElementById('f-phone').value.trim();
+    var city    = document.getElementById('f-city').value;
+    var dist    = document.getElementById('f-district').value;
+    var addr    = document.getElementById('f-address').value.trim();
+    var pkg     = document.getElementById('f-package').value;
+    var valid   = true;
+
+    // Clear errors
+    ['name','phone','city','district','address'].forEach(function(f){
+      document.getElementById('f-'+f).classList.remove('error');
+      document.getElementById('err-'+f).style.display = 'none';
+    });
+
+    if (!name) { showErr('name'); valid = false; }
+    if (!phone || !/^09\d{8}$/.test(phone)) { showErr('phone'); valid = false; }
+    if (!city) { showErr('city'); valid = false; }
+    if (!dist) { showErr('district'); valid = false; }
+    if (!addr) { showErr('address'); valid = false; }
+
+    if (!valid) return;
+
+    // Disable button
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '送出中…';
+
+    // Get user IP (hidden field)
+    var userIP = '';
+    fetch('https://api.ipify.org?format=json')
+      .then(function(r){ return r.json(); })
+      .catch(function(){ return {ip:''}; })
+      .then(function(data){
+        userIP = data.ip || '';
+        sendToGoogleForm(name, phone, city, dist, addr, pkg, userIP);
+      });
+  }
+
+  function sendToGoogleForm(name, phone, city, dist, addr, pkg, ip) {
+    var FORM_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdvn2jKLzRaUdwZSiIBAd80MbzU0xe7wSaXT6Mclj38ktKQ1A/formResponse';
+    var params = new URLSearchParams();
+    params.append('entry.680318995', name);
+    params.append('entry.1570362856', phone);
+    params.append('entry.1523326095', city);
+    params.append('entry.1553052779', dist);
+    params.append('entry.1655974417', addr);
+    params.append('entry.2015863572', pkg);
+    params.append('entry.460406272', ip);
+
+    // FB Pixel: InitiateCheckout on submit
+    if (typeof fbq !== 'undefined') { fbq('track', 'InitiateCheckout'); }
+
+    // Use no-cors fetch (Google Forms doesn't support CORS, but data still submits)
+    fetch(FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    })
+    .then(function(){ redirectToThanks(); })
+    .catch(function(){ redirectToThanks(); });
+  }
+
+  function redirectToThanks() {
+    window.location.href = 'thanks.html';
+  }
+
+  function showErr(field) {
+    document.getElementById('f-'+field).classList.add('error');
+    document.getElementById('err-'+field).style.display = 'block';
+  }
+
+  // ===== Sticky CTA: AddToCart pixel + scroll =====
+  function stickyOrderClick(e) {
+    e.preventDefault();
+    if (typeof fbq !== 'undefined') { fbq('track', 'AddToCart'); }
+    document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ===== Dynamic view count =====
   (function(){
     var base = 127438;
     var el = document.getElementById('view-count');
@@ -1105,26 +1137,7 @@
     }, 8000);
   })();
 
-  // Countdown timer
-  (function(){
-    var totalSeconds = 2 * 3600 + 47 * 60 + 33;
-    var hEl = document.getElementById('cd-h');
-    var mEl = document.getElementById('cd-m');
-    var sEl = document.getElementById('cd-s');
-    function pad(n){ return n < 10 ? '0' + n : '' + n; }
-    setInterval(function(){
-      if(totalSeconds <= 0){ totalSeconds = 3600; return; }
-      totalSeconds--;
-      var h = Math.floor(totalSeconds / 3600);
-      var m = Math.floor((totalSeconds % 3600) / 60);
-      var s = totalSeconds % 60;
-      hEl.textContent = pad(h);
-      mEl.textContent = pad(m);
-      sEl.textContent = pad(s);
-    }, 1000);
-  })();
-
-  // Dynamic publish date
+  // ===== Dynamic publish date =====
   (function(){
     var d = new Date();
     var y = d.getFullYear();
@@ -1137,30 +1150,27 @@
   (function(){
     var fired = false;
     window.addEventListener('scroll', function(){
-      if(fired) return;
+      if (fired) return;
       var scrolled = window.scrollY + window.innerHeight;
       var total = document.documentElement.scrollHeight;
-      if(scrolled / total >= 0.5){
+      if (scrolled / total >= 0.5) {
         fired = true;
-        if(typeof fbq !== 'undefined'){
-          fbq('track', 'ViewContent');
-        }
+        if (typeof fbq !== 'undefined') { fbq('track', 'ViewContent'); }
       }
     });
   })();
 
-  // ===== FB Pixel: Lead (click any Line CTA) =====
-  (function(){
-    document.querySelectorAll('a[href*="lin.ee"], a[href*="line.me"]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        if(typeof fbq !== 'undefined'){
-          fbq('track', 'Lead');
-        }
-      });
+  // ===== FB Pixel: Lead on LINE button click =====
+  document.getElementById('line-btn').addEventListener('click', function(){
+    if (typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
+  });
+
+  // ===== FB Pixel: AddToCart on pkg card click =====
+  document.querySelectorAll('.pkg-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      if (typeof fbq !== 'undefined') { fbq('track', 'AddToCart'); }
     });
-  })();
-
+  });
 </script>
-
 </body>
 </html>
