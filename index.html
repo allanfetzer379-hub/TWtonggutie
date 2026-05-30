@@ -1023,7 +1023,17 @@
     });
   }
 
-  // Sync package card selection with select dropdown
+  // Safe FB pixel call (handles async load)
+  function trackFB(event, params) {
+    if (typeof fbq === 'function') {
+      fbq('track', event, params || {});
+    } else {
+      // Retry once after 1s if fbq not yet loaded
+      setTimeout(function(){ if (typeof fbq === 'function') fbq('track', event, params || {}); }, 1000);
+    }
+  }
+
+  // Sync package card selection with select dropdown + fire AddToCart
   function selectPkg(card) {
     document.querySelectorAll('.pkg-card').forEach(function(c){ c.classList.remove('selected'); });
     card.classList.add('selected');
@@ -1035,6 +1045,9 @@
         break;
       }
     }
+    // FB Pixel: AddToCart
+    var price = PKG_PRICE_MAP[pkgVal] || 1398;
+    trackFB('AddToCart', { value: price, currency: 'TWD', content_name: '藏藥非遺透骨膏貼' });
   }
 
   // Sync select dropdown back to cards
@@ -1105,7 +1118,7 @@
     params.append('entry.460406272', ip);
 
     // FB Pixel: InitiateCheckout on submit
-    if (typeof fbq !== 'undefined') { fbq('track', 'InitiateCheckout'); }
+    trackFB('InitiateCheckout', { content_name: '藏藥非遺透骨膏貼' });
 
     // Use no-cors fetch (Google Forms doesn't support CORS, but data still submits)
     fetch(FORM_URL, {
@@ -1133,7 +1146,7 @@
   // ===== Sticky CTA: AddToCart pixel + scroll =====
   function stickyOrderClick(e) {
     e.preventDefault();
-    if (typeof fbq !== 'undefined') { fbq('track', 'AddToCart'); }
+    trackFB('AddToCart', { content_name: '藏藥非遺透骨膏貼' });
     document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -1165,11 +1178,15 @@
       var total = document.documentElement.scrollHeight;
       if (scrolled / total >= 0.5) {
         fired = true;
-        if (typeof fbq !== 'undefined') { fbq('track', 'ViewContent'); }
+        trackFB('ViewContent');
       }
     });
   })();
 
   // ===== FB Pixel: Lead on LINE button click =====
   document.getElementById('line-btn').addEventListener('click', function(){
- 
+    trackFB('Lead');
+  });
+</script>
+</body>
+</html>
