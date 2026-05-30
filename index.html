@@ -1047,7 +1047,7 @@
     }
     // FB Pixel: AddToCart
     var price = PKG_PRICE_MAP[pkgVal] || 1398;
-    trackFB('AddToCart', { value: price, currency: 'TWD', content_name: '藏藥非遺透骨膏貼' });
+    trackFB('AddToCart');
   }
 
   // Sync select dropdown back to cards
@@ -1118,7 +1118,7 @@
     params.append('entry.460406272', ip);
 
     // FB Pixel: InitiateCheckout on submit
-    trackFB('InitiateCheckout', { content_name: '藏藥非遺透骨膏貼' });
+    trackFB('InitiateCheckout');
 
     // Use no-cors fetch (Google Forms doesn't support CORS, but data still submits)
     fetch(FORM_URL, {
@@ -1146,7 +1146,7 @@
   // ===== Sticky CTA: AddToCart pixel + scroll =====
   function stickyOrderClick(e) {
     e.preventDefault();
-    trackFB('AddToCart', { content_name: '藏藥非遺透骨膏貼' });
+    trackFB('AddToCart');
     document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
   }
 
